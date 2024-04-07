@@ -11,10 +11,31 @@
   ],
   "activationEvents": [
     "refreshWebView",
-    "showLoginPanel"
+    "showLoginPanel",
+    "onView:purpletasks-sidebar"
   ],
   "main": "./dist/extension.js",
   "contributes": {
+    "viewsContainers": {
+      "activitybar": [
+        {
+          "id": "purpletasks-sidebar-view",
+          "title": "PurpleTasks",
+          "icon": "media/logo.svg"
+        }
+      ]
+    },
+    "views": {
+      "purpletasks-sidebar-view": [
+        {
+          "type": "webview",
+          "id": "purpletasks-sidebar",
+          "name": "PurpleTasks",
+          "icon": "media/logo.svg",
+          "contextualTitle": "PurpleTasks"
+        }
+      ]
+    },
     "commands": [
       {
         "command": "purpletasks.helloWorld",

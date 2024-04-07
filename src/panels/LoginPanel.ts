@@ -32,7 +32,7 @@ export class LoginPanel {
     // Otherwise, create a new panel.
     const panel = vscode.window.createWebviewPanel(
       LoginPanel.viewType,
-      "VSinder",
+      "Login",
       column || vscode.ViewColumn.One,
       {
         // Enable javascript in the webview
@@ -156,10 +156,10 @@ export class LoginPanel {
   }
 
   private _getHtmlForWebview(webview: vscode.Webview) {
-    // // And the uri we use to load this script in the webview
-    const scriptUri = webview.asWebviewUri(
-      vscode.Uri.joinPath(this._extensionUri, "out", "compiled/swiper.js")
-    );
+    // // // And the uri we use to load this script in the webview
+    // const scriptUri = webview.asWebviewUri(
+    //   vscode.Uri.joinPath(this._extensionUri, "out", "compiled/swiper.js")
+    // );
 
     // Local path to css styles
     const styleResetPath = vscode.Uri.joinPath(
@@ -172,36 +172,53 @@ export class LoginPanel {
       "media",
       "vscode.css"
     );
+    const stylesPathLoginPath = vscode.Uri.joinPath(
+      this._extensionUri,
+      "media",
+      "login.css"
+    );
 
     // Uri to load styles into webview
     const stylesResetUri = webview.asWebviewUri(styleResetPath);
     const stylesMainUri = webview.asWebviewUri(stylesPathMainPath);
-    const cssUri = webview.asWebviewUri(
-      vscode.Uri.joinPath(this._extensionUri, "out", "compiled/swiper.css")
-    );
+    const stylesLoginUri = webview.asWebviewUri(stylesPathLoginPath);
 
-    // Use a nonce to only allow specific scripts to be run
-    // const nonce = getNonce();
+    //uri ro load scripts
+    const sampleScriptUri = webview.asWebviewUri(
+      vscode.Uri.joinPath(this._extensionUri, "media", "main.js")
+    );
+    const loginScriptUri = webview.asWebviewUri(
+      vscode.Uri.joinPath(this._extensionUri, "media", "login.js")
+    );
+    // const cssUri = webview.asWebviewUri(
+    //   vscode.Uri.joinPath(this._extensionUri, "out", "compiled/swiper.css")
+    // );
 
     return `<!DOCTYPE html>
-			<html lang="en">
-			<head>
-				<meta charset="UTF-8">
-				<!--
-					Use a content security policy to only allow loading images from https or from our extension directory,
-					and only allow scripts that have a specific nonce.
-        -->
-       
-				<meta name="viewport" content="width=device-width, initial-scale=1.0">
-				<link href="${stylesResetUri}" rel="stylesheet">
-				<link href="${stylesMainUri}" rel="stylesheet">
-        <link href="${cssUri}" rel="stylesheet">
-       
-			</head>
-      <body>
-      <h1>Login<h1>
-			</body>
-				
-			</html>`;
+    <html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link href="${stylesResetUri}" rel="stylesheet">
+        <link href="${stylesMainUri}" rel="stylesheet">
+        <link href="${stylesLoginUri}" rel="stylesheet">
+
+    </head>
+    <body>
+    <div class="login-container"></div>
+        <h1 class="title">Login</h1>
+        <form class="login-form">
+            <input type="text" id="username" placeholder="Username" />
+            <input type="password" id="password" placeholder="Password" />
+            <button type="submit" id="login">Login</button>
+        </form>
+
+        <button id="log">log token</button>
+
+    </body>
+        
+        <script src="${loginScriptUri}"></script>
+
+    </html>`;
   }
 }
