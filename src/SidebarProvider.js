@@ -91,11 +91,14 @@ class SidebarProvider {
     <body>
     <div class="login-container"></div>
         <h1 class="title">Login</h1>
-        <form class="login-form">
+        <form id="loginForm">
             <input type="text" id="username" placeholder="Username" />
             <input type="password" id="password" placeholder="Password" />
             <button type="submit" id="login">Login</button>
         </form>
+        <button  id="log">Log</button>
+        
+        
 
     </body>
         
