@@ -19,6 +19,7 @@ export function activate(context: vscode.ExtensionContext) {
       );
     }
   );
+
   context.subscriptions.push(
     vscode.commands.registerCommand("purpletasks.showLoginPanel", () => {
       LoginPanel.createOrShow(context.extensionUri);

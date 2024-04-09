@@ -1,6 +1,10 @@
 (function () {
   const vscode = acquireVsCodeApi();
 
-  // const button = document.getElementById("button");
-  // button.innerHTML = "js button";
+  const exitButton = document.getElementById("exit");
+  const handleExit = () => {
+    vscode.postMessage({ comand: "exit" });
+  };
+
+  exitButton.addEventListener("click", handleExit);
 })();
