@@ -34,6 +34,13 @@
           "icon": "media/logo.svg",
           "contextualTitle": "PurpleTasks"
         }
+      ],
+      "explorer": [
+        {
+          "id": "courses",
+          "name": "Ваши курсы",
+          "when": "workspaceHasFolder"
+        }
       ]
     },
     "commands": [

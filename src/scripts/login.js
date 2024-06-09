@@ -1,15 +1,5 @@
 const vscode = acquireVsCodeApi();
 
-const button = document.getElementById("log");
-button.addEventListener("click", () => {
-  console.log("something");
-  vscode.postMessage({
-    command: "onError",
-    value: "error",
-  });
-});
-button.innerHTML = "text from js";
-
 document
   .getElementById("loginForm")
   .addEventListener("submit", async (event) => {
@@ -29,11 +19,10 @@ document
         }
       );
       const data = await response.json();
-      console.log(data.access_token);
 
       vscode.postMessage({
         command: "setToken",
-        value: data.access_token,
+        token: data.access_token,
       });
     } catch (error) {
       vscode.postMessage({
